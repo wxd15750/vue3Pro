@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-    baseURL:'',
+    baseURL:'http://sph-api.atguigu.cn',
     timeout:1000 * 1000
 })
 

@@ -6,17 +6,16 @@
             </div>
             <div class="login-form">
 
-                <el-form ref="ruleFormRef" :rules="rules" style="max-width: 600px" status-icon label-width="auto"
-                    :model="state">
+                <el-form ref="ruleFormRef" :rules="rules" style="max-width: 600px" label-width="auto" :model="state">
                     <el-form-item label="用户名" prop="username">
                         <el-input v-model="state.username" type="text" />
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
-                        <el-input v-model="state.password" type="password" />
+                        <el-input v-model="state.password" type="password" show-password />
                     </el-form-item>
 
                     <el-form-item>
-                        <el-button style="width: 100%;" @click="submitForm(ruleFormRef)" type="primary">
+                        <el-button style="width: 100%;" @click="submitForm" type="primary">
                             登录
                         </el-button>
 
@@ -28,12 +27,10 @@
 </template>
 <script lang="ts" setup name='Login'>
 import { reactive, ref } from 'vue'
-import type { FormInstance } from 'element-plus'
-
+import { reqToken } from '@/api/login.ts'
 let state = reactive({
-    username: '',
-    password: '',
-
+    username: 'admin',
+    password: '111111',
 })
 let rules = reactive({
     username: [
@@ -46,18 +43,17 @@ let rules = reactive({
     ],
 })
 
-let ruleFormRef = ref<FormInstance>()
+let ruleFormRef = ref()
 
-const submitForm = async (formEl: FormInstance | undefined) => {
-    if (!formEl) return
-    formEl.validate((valid: any) => {
-        if (valid) {
-            console.log(456);
-            console.log('submit!')
-        } else {
-            console.log('error submit!')
-        }
-    })
+const submitForm = async () => {
+    const res = await reqToken(state)
+    if (res.code === 200) {
+        console.log('登录成功');
+
+    } else {
+        console.log('登录失败');
+
+    }
 
 }
 </script>
