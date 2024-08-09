@@ -27,7 +27,8 @@
 </template>
 <script lang="ts" setup name='Login'>
 import { reactive, ref } from 'vue'
-import { reqToken } from '@/api/login.ts'
+import { ElNotification } from 'element-plus'
+import useUserStore from '../../store/userInfo'
 let state = reactive({
     username: 'admin',
     password: '111111',
@@ -42,19 +43,17 @@ let rules = reactive({
         { min: 6, message: '用户名最少为6位', trigger: 'blur' },
     ],
 })
-
+const { userLogin } = useUserStore()
 let ruleFormRef = ref()
-
 const submitForm = async () => {
-    const res = await reqToken(state)
-    if (res.code === 200) {
-        console.log('登录成功');
+    await userLogin(state)
 
-    } else {
-        console.log('登录失败');
-
-    }
-
+    ElNotification({
+        title: '登录成功',
+        type: 'success',
+        message: '登录成功',
+        showClose: false,
+    })
 }
 </script>
 
@@ -81,7 +80,6 @@ const submitForm = async () => {
 
         .login-left {
             width: 750px;
-            border: 1px solid #000;
 
             img {
                 width: 100%;
@@ -92,12 +90,9 @@ const submitForm = async () => {
         .login-form {
             flex: 1;
             padding: 40px 45px 25px;
-            border: 1px solid red;
             display: flex;
             justify-content: center;
             align-items: center;
-
-
         }
     }
 }

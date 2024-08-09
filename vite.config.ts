@@ -6,8 +6,18 @@ export default defineConfig({
   plugins: [vue()],
   resolve:{
     alias:{
-        "@":path.resolve(__dirname,'./src'),
-        'components': path.resolve(__dirname, './src/components'), 
+       "@": path.resolve(__dirname,"src")
     },
-  }
+  },
+  css: {
+    preprocessorOptions: {
+     
+      scss: {
+        api: 'modern-compiler', // 或 "modern"，"legacy"
+        importers: [
+          // ...
+        ],
+      },
+    },
+  },
 })
