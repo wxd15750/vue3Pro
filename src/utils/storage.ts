@@ -1,4 +1,4 @@
-const TokenKey = 'Token_Key'
+const TokenKey = 'TOKEN_KEY'
 
 /**
  * @description 获取Token

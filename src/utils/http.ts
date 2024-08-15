@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import useUserStore from '../store/userInfo'
 
 const request = axios.create({
     baseURL:'http://sph-api.atguigu.cn',
@@ -8,6 +9,11 @@ const request = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use((config) => {
+    // 从pinia中获取token
+    let {token} = useUserStore()
+    if(token){
+        config.headers.token = token
+    }
     return config
 })
 // 响应拦截器

@@ -1,6 +1,6 @@
 import {defineStore}  from 'pinia'
-import { getToken, setToken } from '../utils/storage';
-import { reqToken } from '../api/login';
+import { getToken, removeToken, setToken } from '../utils/storage';
+import { reqLayout, reqToken, reqUserInfo } from '../api/login';
 
 
 let useUserStore = defineStore('userStore',{
@@ -8,7 +8,8 @@ let useUserStore = defineStore('userStore',{
         return {
             token: getToken() || '',
             userInfo:{
-
+                username:'',
+                avator:''
             }
         }
       },
@@ -22,8 +23,23 @@ let useUserStore = defineStore('userStore',{
             }
         },
         // 获取用户信息
-        async userInfo(){
-
+        async userInfos(){
+            const res = await reqUserInfo()
+            if(res.code == 200){
+                this.userInfo.username = res.data.name
+                this.userInfo.avator = res.data.avatar
+            }
+            
+        },
+        // 退出登录
+        async userLayout(){
+            await reqLayout()
+            this.token = ''
+            this.userInfo = Object.assign(this.userInfo,{
+                username:'',
+                avator:''
+            })
+            removeToken()
         }
       },
       getters:{

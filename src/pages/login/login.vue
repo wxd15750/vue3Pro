@@ -28,6 +28,7 @@
 <script lang="ts" setup name='Login'>
 import { reactive, ref } from 'vue'
 import { ElNotification } from 'element-plus'
+import { useRouter, useRoute } from 'vue-router'
 import useUserStore from '../../store/userInfo'
 let state = reactive({
     username: 'admin',
@@ -43,17 +44,22 @@ let rules = reactive({
         { min: 6, message: '用户名最少为6位', trigger: 'blur' },
     ],
 })
+// 获取路由器
+let router = useRouter()
+let route = useRoute()
 const { userLogin } = useUserStore()
 let ruleFormRef = ref()
 const submitForm = async () => {
     await userLogin(state)
-
+    let redirect: any = route.query.redirect
+    router.push({ path: redirect || '/' })
     ElNotification({
         title: '登录成功',
         type: 'success',
         message: '登录成功',
         showClose: false,
     })
+
 }
 </script>
 
