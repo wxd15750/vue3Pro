@@ -9,14 +9,11 @@ export default defineConfig({
        "@": path.resolve(__dirname,"src")
     },
   },
-  css: {
+   //scss全局变量一个配置
+   css: {
     preprocessorOptions: {
-     
       scss: {
-        api: 'modern-compiler', // 或 "modern"，"legacy"
-        importers: [
-          // ...
-        ],
+        javascriptEnabled: true,
       },
     },
   },
