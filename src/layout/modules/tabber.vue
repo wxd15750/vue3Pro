@@ -1,8 +1,7 @@
 <template>
-
-
+    导航栏
 </template>
-<script lang="ts" setup name='Home'>
+<script lang="ts" setup name='Tabber'>
 
 </script>
 

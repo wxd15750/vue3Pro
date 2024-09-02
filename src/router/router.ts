@@ -1,11 +1,11 @@
 // 路由组件
-import Home from "../pages/home/home.vue";
+import Layout from "@/layout/index.vue";
 import Login from "../pages/login/login.vue";
 // 路由表
 export let routes = [
     {
         path:'/',
-        component:Home
+        component:Layout
     },
     {
         path:'/login',

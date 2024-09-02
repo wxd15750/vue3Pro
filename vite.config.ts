@@ -6,15 +6,16 @@ export default defineConfig({
   plugins: [vue()],
   resolve:{
     alias:{
-       "@": path.resolve(__dirname,"src")
+       "@": path.resolve("./src")
     },
   },
-   //scss全局变量一个配置
-   css: {
+  css: {
     preprocessorOptions: {
       scss: {
-        javascriptEnabled: true,
+        javascriptEnabled:true,
+        additionalData:'@import "./src/styles/variable.scss";'
       },
     },
   },
+   
 })
