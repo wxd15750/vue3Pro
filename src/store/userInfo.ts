@@ -1,16 +1,20 @@
 import {defineStore}  from 'pinia'
 import { getToken, removeToken, setToken } from '../utils/storage';
 import { reqLayout, reqToken, reqUserInfo } from '../api/login';
-
+// 常量路由
+import { constStaticRoute } from '../router/router';
+import { UserState } from './type/type';
 
 let useUserStore = defineStore('userStore',{
-    state:()=>{
+    state:():UserState=>{
         return {
             token: getToken() || '',
             userInfo:{
                 username:'',
-                avator:''
-            }
+                avator:'',
+                
+            },
+            menuRoutes:constStaticRoute
         }
       },
       actions:{

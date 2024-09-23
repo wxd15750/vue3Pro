@@ -1,5 +1,5 @@
 <template>
-    主要内容区
+    <RouterView></RouterView>
 </template>
 <script lang="ts" setup name='Content'>
 </script>

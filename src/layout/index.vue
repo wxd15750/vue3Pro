@@ -5,7 +5,7 @@
             <!-- LOGO -->
             <Logo />
             <!-- 菜单栏 -->
-            <Menu />
+            <Menu :meunList="userStore.menuRoutes" />
         </div>
         <div class="layout_right">
             <div class="layout_header">导航栏
@@ -30,6 +30,10 @@ import Menu from './modules/menu.vue'
 import Tabber from './modules/tabber.vue'
 import Content from './modules/content.vue'
 import Footer from './modules/footer.vue'
+// 获取仓库的路由数据
+import useUserStore from '../store/userInfo'
+let userStore = useUserStore()
+console.log(userStore.menuRoutes);
 
 </script>
 
@@ -43,8 +47,12 @@ import Footer from './modules/footer.vue'
 
     .layout_aside {
         width: $menu_aside_width;
-        height: 100vh;
+        height: 100%;
         background-color: $menu_aside_background;
+
+        .el-scrollbar {
+            height: calc(100vh - $logo_height);
+        }
     }
 
     .layout_right {
