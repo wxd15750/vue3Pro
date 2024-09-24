@@ -13,13 +13,12 @@
             </div>
             <div class="layout_content">
                 <el-card>
-                    内容区
                     <Content />
                 </el-card>
             </div>
-            <div class="footer">
+            <!-- <div class="footer">
                 <Footer />
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -29,7 +28,7 @@ import Logo from './modules/logo.vue'
 import Menu from './modules/menu.vue'
 import Tabber from './modules/tabber.vue'
 import Content from './modules/content.vue'
-import Footer from './modules/footer.vue'
+// import Footer from './modules/footer.vue'
 // 获取仓库的路由数据
 import useUserStore from '../store/userInfo'
 let userStore = useUserStore()

@@ -1,8 +1,8 @@
 <template>
-    <h1>我是首恶</h1>
+    <h1>大屏课时化</h1>
 
 </template>
-<script lang="ts" setup name='Home'>
+<script lang="ts" setup name='Screen'>
 
 </script>
 

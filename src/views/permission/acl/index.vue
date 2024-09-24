@@ -1,8 +1,8 @@
 <template>
-    <h1>我是首恶</h1>
+    <h1>菜单管理</h1>
 
 </template>
-<script lang="ts" setup name='Home'>
+<script lang="ts" setup name='Acl'>
 
 </script>
 

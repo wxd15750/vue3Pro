@@ -19,6 +19,7 @@ export let constStaticRoute:RouteRecordRaw[] = [
             title:'layout',
             hidden:false
         },
+        redirect: '/home',
         children:[
             {
                 path:'/home',
@@ -28,13 +29,50 @@ export let constStaticRoute:RouteRecordRaw[] = [
                     icon:'Promotion',
                     hidden:false
                 },
+            }
+        ]
+    },
+ 
+    {
+        path:'/screen',
+        component:() => import('@/views/screen/index.vue'),
+        meta:{
+            title:'数据大屏',
+            hidden:false
+        },
+    },
+    {
+        path:'/acls',
+        component:() => import('@/layout/index.vue'),
+        meta:{
+            title:'权限管理',
+            hidden:false
+        },
+        children:[
+            {
+                path:'/acls/role',
+                component:()=>import('@/views/permission/role/index.vue'),
+                meta:{
+                    title:'角色管理',
+                    icon:'Promotion',
+                    hidden:false
+                },
             },
             {
-                path:'/test',
-                component:()=>import('@/views/home/home.vue'),
+                path:'/acls/acl',
+                component:()=>import('@/views/permission/acl/index.vue'),
                 meta:{
-                    title:'测试',
-                    icon:'',
+                    title:'菜单管理',
+                    icon:'Promotion',
+                    hidden:false
+                },
+            },
+            {
+                path:'/acls/user',
+                component:()=>import('@/views/permission/user/index.vue'),
+                meta:{
+                    title:'用户管理',
+                    icon:'Promotion',
                     hidden:false
                 },
             }
