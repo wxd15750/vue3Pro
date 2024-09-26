@@ -16,10 +16,10 @@ export let constStaticRoute:RouteRecordRaw[] = [
         path:'/',
         component:() => import('@/layout/index.vue'),
         meta:{
-            title:'layout',
+            title:'',
             hidden:false
         },
-        redirect: '/home',
+        // redirect: '/home',
         children:[
             {
                 path:'/home',
@@ -38,7 +38,8 @@ export let constStaticRoute:RouteRecordRaw[] = [
         component:() => import('@/views/screen/index.vue'),
         meta:{
             title:'数据大屏',
-            hidden:false
+            hidden:false,
+            icon:'Promotion',
         },
     },
     {
@@ -46,7 +47,8 @@ export let constStaticRoute:RouteRecordRaw[] = [
         component:() => import('@/layout/index.vue'),
         meta:{
             title:'权限管理',
-            hidden:false
+            hidden:false,
+            icon:'Promotion',
         },
         children:[
             {

@@ -1,25 +1,33 @@
 <template>
     <div class="layout">
         <!-- 菜单栏 -->
-        <div class="layout_aside">
+        <div class="layout_aside" :class="{ fold: settings.fload ? true : false }">
             <!-- LOGO -->
             <Logo />
             <!-- 菜单栏 -->
-            <Menu :meunList="userStore.menuRoutes" />
+            <el-scrollbar class="menu_list" :class="{ fold: settings.fload ? true : false }">
+                <el-menu :collapse="settings.fload ? true : false" background-color="#001529"
+                    class="el-menu-vertical-demo" text-color="#fff">
+
+                    <Menu :meunList="userStore.menuRoutes" />
+                </el-menu>
+            </el-scrollbar>
         </div>
-        <div class="layout_right">
-            <div class="layout_header">导航栏
-                <Tabber />
-            </div>
-            <div class="layout_content">
-                <el-card>
-                    <Content />
-                </el-card>
-            </div>
+        <div class="layout_tabbar" :class="{ fold: settings.fload ? true : false }">
+            <Tabber />
             <!-- <div class="footer">
                 <Footer />
             </div> -->
         </div>
+        <el-scrollbar class="layout_content" :class="{ fold: settings.fload ? true : false }">
+            <div>
+
+                <el-card>
+                    <Content />
+                </el-card>
+
+            </div>
+        </el-scrollbar>
     </div>
 
 </template>
@@ -31,8 +39,9 @@ import Content from './modules/content.vue'
 // import Footer from './modules/footer.vue'
 // 获取仓库的路由数据
 import useUserStore from '../store/userInfo'
+import useSettingStore from '../store/setting'
+let settings = useSettingStore()
 let userStore = useUserStore()
-console.log(userStore.menuRoutes);
 
 </script>
 
@@ -40,35 +49,60 @@ console.log(userStore.menuRoutes);
 .layout {
     width: 100%;
     height: 100%;
-    display: flex;
-    background-color: #d36f6f;
-    color: #fff;
+    overflow: hidden;
 
     .layout_aside {
-        width: $menu_aside_width;
         height: 100%;
+        width: $menu_aside_width;
         background-color: $menu_aside_background;
+        transition: all .3s;
+        box-sizing: border-box;
+        overflow: hidden;
 
         .el-scrollbar {
-            height: calc(100vh - $logo_height);
+            height: calc(100% - $nav_header_height);
+        }
+
+        .el-menu {
+            border-right: none;
+        }
+
+        &.fold {
+            width: $menu_asidemin_width;
         }
     }
 
-    .layout_right {
-        .layout_header {
-            height: $nav_header_height;
-            width: calc(100vw - $menu_aside_width);
-            background-color: #78e794;
-        }
+    .layout_tabbar {
+        position: fixed;
+        top: 0;
+        left: $menu_aside_width;
+        width: calc(100% - $menu_aside_width);
+        height: $nav_header_height;
+        background-color: #ffffff;
+        border-bottom: 1px solid #f0eeee;
+        transition: all .3s;
 
-        .layout_content {
-            box-sizing: border-box;
-            padding: 20px;
-            height: calc(100vh - $nav_header_height - $footer_height);
+        &.fold {
+            width: calc(100% - $menu_asidemin_width);
+            left: $menu_asidemin_width;
         }
+    }
 
-        .footer {
-            height: $footer_height;
+    .layout_content {
+        position: absolute;
+        box-sizing: border-box;
+        top: $nav_header_height;
+        left: $menu_aside_width;
+        width: calc(100% - $menu_aside_width);
+        height: calc(100% - $nav_header_height);
+        padding: 10px;
+        overflow: auto;
+        transition: all .3s;
+
+        &.fold {
+            width: calc(100vw - $menu_asidemin_width);
+            left: $menu_asidemin_width;
+
         }
     }
 }
